@@ -7,20 +7,22 @@ class LaunchesView extends Component {
   constructor(props){
     super(props);
     this.state = {
+      launches: props.launchCollection.launches,
       isLoading: true
     }
   }
 
   componentDidMount() {
     const { dispatch, launchCollection } = this.props;
+    const { launches } = launchCollection;
     fetchLaunchesIfNeeded({ dispatch, launchCollection });
-    this.setState({ isLoading: launchCollection.fetching })
+    this.setState({ isLoading: launchCollection.fetching, launches })
   }
 
   getContent() {
-    const { launchCollection } = this.props;
+    const { launches } = this.state;
 
-    return launchCollection.launches.map((launch)=> {
+    return launches.map((launch)=> {
       return <Launch {...{
         key: launch.launch_id,
         launch
