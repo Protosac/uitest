@@ -31,7 +31,7 @@ class RocketsView extends Component {
    * @param links Object, links to images
    * @returns String, url to image
    */
-  static getRocketImage(links){
+  getRocketImage(links){
     const image = links.flickr_images.length > 0
                   ? links.flickr_images[0]
                   : links.mission_patch_small;
@@ -42,7 +42,7 @@ class RocketsView extends Component {
 
   getRocket(rocketId){
     const { rockets }= this.state;
-    return <Rocket {...rockets[rocketId]} />
+    return <Rocket {...{...rockets[rocketId], rocketId}} />
   }
 
   render() {

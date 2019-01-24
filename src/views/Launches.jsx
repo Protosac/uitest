@@ -7,20 +7,19 @@ class LaunchesView extends Component {
   constructor(props){
     super(props);
     this.state = {
-      launches: props.launchCollection.launches,
       isLoading: true
     }
   }
 
   componentDidMount() {
     const { dispatch, launchCollection } = this.props;
-    const { launches } = launchCollection;
     fetchLaunchesIfNeeded({ dispatch, launchCollection });
-    this.setState({ isLoading: launchCollection.fetching, launches })
+    this.setState({ isLoading: launchCollection.fetching })
   }
 
   getContent() {
-    const { launches } = this.state;
+    // eslint-disable-next-line react/destructuring-assignment
+    const { launches } = this.props.launchCollection;
 
     return launches.map((launch)=> {
       return <Launch {...{
